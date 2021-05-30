@@ -24,7 +24,7 @@ class _NinjaCardState extends State<NinjaCard> {
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
         //TODO 2
-        title: Text("Ninja ID Card"),
+        title: Text("ID Card"),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         //Shadow
@@ -122,9 +122,76 @@ class _NinjaCardState extends State<NinjaCard> {
                 ),
               ],
             ),
+            SizedBox(height: 60.0),
+            Container(
+              child: ButtonTheme(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => QouteList()));
+                  },
+                  child: Text(
+                    "NEXT",
+                    style: TextStyle(
+                        color: Colors.black87,
+                        letterSpacing: 1.0,
+                        fontSize: 18.0),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amberAccent[200],
+                    elevation: 10,
+                    padding:
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 120),
+                    minimumSize: Size(220, 40),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+class QouteList extends StatefulWidget {
+  @override
+  _QouteListState createState() => _QouteListState();
+}
+
+class _QouteListState extends State<QouteList> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Quote(),
+    );
+  }
+}
+
+class Quote extends StatelessWidget {
+
+  List<String> quotes = [
+    'Follow Your Dreams',
+    'I have nothing to declare except my genius',
+    'The truth is rarely pure and never simple'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text("Quote Awesome"),
+        centerTitle: true,
+        backgroundColor: Colors.redAccent,
+      ),
+      body: Column(
+        children: quotes.map((quote) => Text(quote)).toList(),
+      ),
+    );
+
   }
 }
