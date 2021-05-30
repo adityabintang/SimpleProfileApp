@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,7 +9,14 @@ void main() {
 }
 
 //TODO 1
-class NinjaCard extends StatelessWidget {
+class NinjaCard extends StatefulWidget {
+  @override
+  _NinjaCardState createState() => _NinjaCardState();
+}
+
+class _NinjaCardState extends State<NinjaCard> {
+  int ninjaLevel = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +30,15 @@ class NinjaCard extends StatelessWidget {
         //Shadow
         elevation: 0.0,
       ),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            ninjaLevel++;
+          });
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.grey[800],
+      ),
       //TODO 4 : make a padding
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
@@ -35,8 +51,7 @@ class NinjaCard extends StatelessWidget {
             //TODO 15
             Center(
               child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://lh3.googleusercontent.com/NvxKtITJ9isJIssWy2uepB-aw74xNn0CqVe-NeRn1Y7AIPd8nuOPCgGfhEuWpIyDFLJZZEnFL9AfyylSHcL66UgGBBfkwUl9F9VAfchugyR_4VnbzKRl8irg4i1yO6xwdO-MK8q07WOoB-4ZZSvzkhFhhwWFWsrwvre_RSf0sxG_MDaP1V_i5AM1IqlO0_Ew-yoy5_hAeoPL1qhRW0xdJ0zZ5_7wJByU7lbg_5Xo1N1AlDyv-ec8H2Klk4E0mHshkwDv-2EWBEBsMmA4GpF4KoazsCbG0DiHVMPVrhF6GJC526cKcsrl7Y_y_0rkAbsphulVnwZynCxcjVlYRBzYOTCikzH5yG88WrLjh4Z0JWGDNLCEudqjZ3Kom3n72BZiO0wCMt1stNuUA-fMDDqpb-Wnc7B8-FtzowcJ4fd1U5i0mz8PEdeZJQXLYXngwYALUm_jPSUGYz08mHUR011eJ7CcgXQBaKtQh7RlJ4lSEJGGX2bn-ttLXFONaldSR7nhKVc5S5-pMw7wAVRcL3VT58DrjYcy87JZlH_Ov5dnALDwIFF0pspxE3CiTDl9Y-XlgpWJMkbmPo7pg7cM6k4sv7RtPmKhHzFI7lIUdf7pO-3CR1-8soYNgZjMLiGHeWBYPboI_Dv-mYNIdAunLrFkl6XZlVRpclb4z4qgV3mnKzSMaKV_nzFtXacoTzUQJUvWOFdCKMoX-_Ki40hxlKarngyv=w524-h654-no?authuser=0"),
+                backgroundImage: AssetImage("assets/photo.jpg"),
                 radius: 40.0,
               ),
             ),
@@ -75,7 +90,7 @@ class NinjaCard extends StatelessWidget {
             SizedBox(height: 10.0),
 
             Text(
-              "8",
+              "$ninjaLevel",
               style: TextStyle(
                   color: Colors.amberAccent[200],
                   letterSpacing: 2.0,
