@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'quote.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -171,13 +172,54 @@ class _QouteListState extends State<QouteList> {
   }
 }
 
-class Quote extends StatelessWidget {
+class Quote extends StatefulWidget {
+  @override
+  _QuoteState createState() => _QuoteState();
+}
 
-  List<String> quotes = [
-    'Follow Your Dreams',
-    'I have nothing to declare except my genius',
-    'The truth is rarely pure and never simple'
+class _QuoteState extends State<Quote> {
+  List<QuoteList> quotes = [
+    QuoteList(author: 'aditya bintang', text: 'Follow Your Dreams'),
+    QuoteList(
+        author: 'aditya bintang',
+        text: 'I have nothing to declare except my genius'),
+    QuoteList(
+        author: 'aditya bintang',
+        text: 'The truth is rarely pure and never simple')
   ];
+
+  Widget quoteTemplate(quote) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              quote.text,
+              style: TextStyle(fontSize: 18.0, color: Colors.grey[600]),
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              quote.author,
+              style: TextStyle(fontSize: 14.0, color: Colors.grey[800]),
+            ),
+            SizedBox(height: 8.0),
+            FlatButton.icon(
+              onPressed: () {
+                setState(() {
+                  quotes.remove(quote);
+                });
+              },
+              label: Text("delete quote"),
+              icon: Icon(Icons.delete),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,9 +231,8 @@ class Quote extends StatelessWidget {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote) => Text(quote)).toList(),
+        children: quotes.map((quote) => quoteTemplate(quote)).toList(),
       ),
     );
-
   }
 }
